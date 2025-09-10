@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { AuthenticationController } from "@features/auth";
 import { ProductController } from "@features/product";
+import { TikTokController } from "@features/tiktok";
 import { checkUserCredentialsMiddleware } from "@middlewares";
 
 const routes = Router();
@@ -11,5 +12,11 @@ routes.post("/:user_id/products", ProductController.create);
 routes.get("/:user_id/products/total", ProductController.getTotal);
 routes.get("/:user_id/products", ProductController.getAll);
 routes.delete("/:user_id/products/:id", ProductController.delete);
+
+// Rotas do TikTok
+routes.get("/tiktok/config", TikTokController.checkConfiguration);
+routes.get("/tiktok/test", TikTokController.testIntegration);
+routes.get("/:user_id/tiktok/products", TikTokController.getProductsFromNuvemShop);
+routes.post("/:user_id/tiktok/sync", TikTokController.syncProductsToTikTok);
 
 export default routes;
